@@ -1,0 +1,33 @@
+name: Opdater TRMNL Elpriser
+
+on:
+  schedule:
+    # Kører hvert dag 13.17 minut
+    - cron: '5 13 * * *'
+  # Gør det muligt at teste og køre manuelt fra GitHubs interface
+  workflow_dispatch:
+
+jobs:
+  update-elpriser:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Hent kildekode
+        uses: actions/checkout@v4
+
+      - name: Opsæt Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip' # cacher biblioteker for hurtigere afvikling
+
+      - name: Installer afhængigheder
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Kør elpris-opdatering
+        env:
+          TRMNL_WEBHOOK_URL: ${{ secrets.TRMNL_WEBHOOK_URL }}
+        run: |
+          python trmnl_elpriser.py
