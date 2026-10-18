@@ -147,7 +147,7 @@ payload = {
         "charge_window": best_window,
         "updated_at": now.strftime("%H:%M"),
         "chart_bars": chart_bars[:30],
-        "today_table": today_table[::2]
+        "today_table": today_table[]
     }
 }
 
