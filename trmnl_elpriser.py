@@ -10,7 +10,7 @@ AREA = "DK1"
 NET_COMPANY = "trefor"
 
 # 1. Hent data fra elpriser.org
-url = f"https://elpriser.org/api/schedule?area={AREA}&net={NET_COMPANY}&mode=net_inkl_alt"
+url = f"https://elpriser.org/api/prices?area={AREA}&gln={NET_COMPANY}&mode=net_inkl_alt"
 
 try:
     res = requests.get(url, timeout=15)
