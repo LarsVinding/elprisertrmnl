@@ -127,15 +127,23 @@ for r in future_records:
         "is_peak": (17 <= r["hour"] <= 20)  # Trefor spidslast
     })
 
-# 6. Dagens tabel (hver 2. time)
+# 6. Dagens og morgendagens tabeller (alle 24 timer)
 today_table = []
+tomorrow_table = []
+
 for r in all_records:
+    item = {
+        "hour": f"{r['hour']:02d}",
+        "price": f"{r['price']:.2f}",
+        "is_now": (r["dt"] == now_hour_start),
+        "is_peak": (17 <= r["hour"] <= 20)
+    }
     if r["dt"].date() == now.date():
-        today_table.append({
-            "hour": f"{r['hour']:02d}:00",
-            "price": f"{r['price']:.2f}",
-            "is_now": (r["dt"] == now_hour_start)
-        })
+        today_table.append(item)
+    elif r["dt"].date() == (now.date() + timedelta(days=1)):
+        tomorrow_table.append(item)
+
+has_tomorrow = len(tomorrow_table) == 24
 
 # 7. Payload til TRMNL
 payload = {
@@ -146,8 +154,11 @@ payload = {
         "max_price": f"{max_val:.2f}",
         "charge_window": best_window,
         "updated_at": now.strftime("%H:%M"),
-        "chart_bars": chart_bars[:30],
-        "today_table": today_table
+        "today_date": now.strftime("%d/%m"),
+        "tomorrow_date": (now + timedelta(days=1)).strftime("%d/%m"),
+        "has_tomorrow": has_tomorrow,
+        "today_table": today_table,
+        "tomorrow_table": tomorrow_table
     }
 }
 
