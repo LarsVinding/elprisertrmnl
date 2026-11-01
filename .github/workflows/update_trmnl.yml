@@ -2,7 +2,6 @@ name: Opdater TRMNL Elpriser
 
 on:
   schedule:
-    # Kører hvert dag 13.17 minut
     - cron: '10 * * * *'
   # Gør det muligt at teste og køre manuelt fra GitHubs interface
   workflow_dispatch:
