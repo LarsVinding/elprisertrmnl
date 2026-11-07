@@ -2,14 +2,18 @@ name: Opdater TRMNL Elpriser
 
 on:
   schedule:
-    - cron: '10 * * * *'
+    # Kl. 00:05 dansk tid (23:05 UTC om vinteren)
+    - cron: '5 23 * * *'
+    # Kl. 13:15 dansk tid (12:15 UTC om vinteren)
+    - cron: '15 12 * * *'
   # Gør det muligt at teste og køre manuelt fra GitHubs interface
   workflow_dispatch:
 
 jobs:
   update-elpriser:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 3
+    
     steps:
       - name: Hent kildekode
         uses: actions/checkout@v4
