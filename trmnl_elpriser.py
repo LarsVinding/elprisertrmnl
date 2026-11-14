@@ -107,26 +107,6 @@ min_val = min(future_prices)
 max_val = max(future_prices)
 price_range = (max_val - min_val) if (max_val - min_val) > 0 else 1.0
 
-chart_bars = []
-for r in future_records:
-    dt = r["dt"]
-    p = r["price"]
-    bar_height = int(15 + ((p - min_val) / price_range) * 85)
-    
-    is_now = (dt == now_hour_start)
-    is_charge_hour = False
-    if best_start_dt and best_end_dt:
-        is_charge_hour = (best_start_dt <= dt <= best_end_dt)
-        
-    chart_bars.append({
-        "hour": f"{r['hour']:02d}",
-        "price": f"{p:.2f}",
-        "height": bar_height,
-        "is_now": is_now,
-        "is_charge_hour": is_charge_hour,
-        "is_peak": (17 <= r["hour"] <= 20)  # Trefor spidslast
-    })
-
 # 6. Dagens og morgendagens tabeller (alle 24 timer)
 today_table = []
 tomorrow_table = []
@@ -158,7 +138,8 @@ payload = {
         "tomorrow_date": (now + timedelta(days=1)).strftime("%d/%m"),
         "has_tomorrow": has_tomorrow,
         "today_table": today_table,
-        "tomorrow_table": tomorrow_table
+        "tomorrow_table": tomorrow_table,
+        "all_records": all_records
     }
 }
 
