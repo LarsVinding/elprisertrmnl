@@ -124,7 +124,8 @@ for r in all_records:
         tomorrow_table.append(item)
 
 has_tomorrow = len(tomorrow_table) == 24
-
+if not has_tommorrow:
+    tomorrow_table = []
 # 7. Payload til TRMNL
 payload = {
     "merge_variables": {
