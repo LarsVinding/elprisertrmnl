@@ -105,7 +105,6 @@ if len(future_records) >= 3:
 future_prices = [r["price"] for r in future_records] if future_records else [current_price]
 min_val = min(future_prices)
 max_val = max(future_prices)
-price_range = (max_val - min_val) if (max_val - min_val) > 0 else 1.0
 
 # 6. Dagens og morgendagens tabeller (alle 24 timer)
 today_table = []
@@ -142,6 +141,6 @@ payload = {
         "tomorrow_table": tomorrow_table
     }
 }
-
+print(all_records)
 res = requests.post(TRMNL_WEBHOOK_URL, json=json.dumps(payload), timeout=10)
 print(f"TRMNL Webhook respons: {res.status_code}")
