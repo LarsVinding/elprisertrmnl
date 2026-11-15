@@ -143,5 +143,5 @@ payload = {
     }
 }
 
-res = requests.post(TRMNL_WEBHOOK_URL, json=payload, timeout=10)
+res = requests.post(TRMNL_WEBHOOK_URL, json=json.dumps(payload), timeout=10)
 print(f"TRMNL Webhook respons: {res.status_code}")
