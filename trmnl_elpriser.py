@@ -138,8 +138,7 @@ payload = {
         "tomorrow_date": (now + timedelta(days=1)).strftime("%d/%m"),
         "has_tomorrow": has_tomorrow,
         "today_table": today_table,
-        "tomorrow_table": tomorrow_table,
-        "all_records": all_records
+        "tomorrow_table": tomorrow_table
     }
 }
 
