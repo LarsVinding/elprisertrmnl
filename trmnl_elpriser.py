@@ -120,7 +120,7 @@ for r in all_records:
     }
     if r["dt"].date() == now.date():
         today_table.append(item)
-    elif r["dt"].date() == (now.date() + timedelta(days=1)):
+    else
         tomorrow_table.append(item)
 
 has_tomorrow = len(tomorrow_table) == 24
