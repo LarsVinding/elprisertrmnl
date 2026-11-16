@@ -2,6 +2,7 @@
 import os
 from datetime import datetime, timedelta
 import requests
+import json
 
 # Konfiguration
 TRMNL_WEBHOOK_URL = os.environ.get(
@@ -54,7 +55,7 @@ def parse_day_records(day_data, day_date_str):
     return records
 
 all_records.extend(parse_day_records(today_data, today_data.get("date", today_str)))
-
+print(tomorrow_data)
 if tomorrow_data and tomorrow_data["current_price"]:
     all_records.extend(parse_day_records(tomorrow_data, tomorrow_str))
 
@@ -141,6 +142,6 @@ payload = {
         "tomorrow_table": tomorrow_table
     }
 }
-print(all_records)
+#print(all_records)
 res = requests.post(TRMNL_WEBHOOK_URL, json=json.dumps(payload), timeout=10)
 print(f"TRMNL Webhook respons: {res.status_code}")
