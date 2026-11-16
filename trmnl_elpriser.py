@@ -123,7 +123,7 @@ for r in all_records:
         tomorrow_table.append(item)
 
 has_tomorrow = len(tomorrow_table) == 24
-if not has_tommorrow:
+if not has_tomorrow:
     tomorrow_table = []
 # 7. Payload til TRMNL
 payload = {
