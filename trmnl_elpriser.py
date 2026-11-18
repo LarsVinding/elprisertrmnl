@@ -2,7 +2,6 @@
 import os
 from datetime import datetime, timedelta
 import requests
-import json
 
 # Konfiguration
 TRMNL_WEBHOOK_URL = os.environ.get(
@@ -143,5 +142,5 @@ payload = {
     }
 }
 #print(all_records)
-res = requests.post(TRMNL_WEBHOOK_URL, json=json.dumps(payload), timeout=10)
+res = requests.post(TRMNL_WEBHOOK_URL, json=payload, timeout=10)
 print(f"TRMNL Webhook respons: {res.status_code}")
