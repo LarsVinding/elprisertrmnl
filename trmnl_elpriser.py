@@ -54,8 +54,8 @@ def parse_day_records(day_data, day_date_str):
     return records
 
 all_records.extend(parse_day_records(today_data, today_data.get("date", today_str)))
-print(tomorrow_data)
-if tomorrow_data and tomorrow_data["current_price"]:
+
+if tomorrow_data and tomorrow_data['prices'][0]['price']:
     all_records.extend(parse_day_records(tomorrow_data, tomorrow_str))
 
 all_records.sort(key=lambda x: x["dt"])
